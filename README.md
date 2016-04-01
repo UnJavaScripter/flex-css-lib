@@ -32,7 +32,7 @@ This starts a server watching for the specified file for changes and compiling i
     
 #### To generate a minified & vendor prefixed version:
 
-`stylus -u autoprefixer-stylus -c main.styl -o ./dist/main.css`
+`stylus -u autoprefixer-stylus -c main.styl -o ./dist/main.min.css`
 
-This updates the ./dist/main.css file.
+This updates the ./dist/main.min.css file.
 
