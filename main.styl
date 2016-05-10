@@ -1,5 +1,161 @@
-MEDIA_SM = 600px
-MEDIA_MD = 960px
+MEDIA_XS_TOP       = 599px
+
+MEDIA_SM            = 600px
+MEDIA_SM_TOP        = 959px
+
+MEDIA_MD            = 960px
+MEDIA_MD_TOP       = 1279px
+
+MEDIA_LG            = 1280px
+MEDIA_LG_TOP        = 1919px
+
+
+
+/*
+| Layout (direction)
+|
+*/
+
+[layout="row"]
+  flex-direction row
+    
+[layout="column"]
+  flex-direction column
+
+
+[layout-xs="row"]
+    @media screen and (max-width MEDIA_XS_TOP)
+        flex-direction row
+
+[layout-xs="column"]
+    @media screen and (max-width MEDIA_XS_TOP)
+        flex-direction column
+        
+
+
+[layout-sm="row"]
+    @media (min-width MEDIA_SM) and (max-width MEDIA_SM_TOP)
+        flex-direction row
+
+[layout-sm="column"]
+    @media (min-width MEDIA_SM) and (max-width MEDIA_SM_TOP)
+        flex-direction column
+
+
+
+[layout-md="row"]
+    @media (min-width MEDIA_MD) and (max-width MEDIA_MD_TOP)
+        flex-direction row
+
+[layout-md="column"]
+    @media (min-width MEDIA_MD) and (max-width MEDIA_MD_TOP)
+        flex-direction column
+
+
+
+[layout-lg="row"]
+    @media (min-width MEDIA_LG) and (max-width MEDIA_LG_TOP)
+        flex-direction row
+
+[layout-lg="column"]
+    @media (min-width MEDIA_LG) and (max-width MEDIA_LG_TOP)
+        flex-direction column
+
+/*
+| Layout align
+|
+*/
+
+
+// Base
+
+_layoutAlign(x = start center end space-around space-between, y = start center end stretch, size = xs sm md lg)
+
+  layourAlign_properties =
+    if x == start
+      justify-content flex-start      
+    if x == center
+      justify-content center          
+    if x == end
+      justify-content flex-end        
+    if x == space-around
+      justify-content space-around    
+    if x == space-between
+      justify-content space-between   
+  
+    if y == start
+      align-content flex-start        
+      align-items flex-start          
+    if y == center
+      align-content center            
+      align-items center              
+    if y == end
+      align-content flex-end          
+      align-items flex-end            
+    if y == stretch
+      align-content stretch           
+      align-items stretch
+
+
+  {"[layout-align='"}{x}{" "}{y}{"']"}
+    max-width 100%
+    box-sizing border-box
+    {layourAlign_properties}
+
+  @media screen and (max-width MEDIA_XS_TOP)
+    {"[layout-align-xs='"}{x}{" "}{y}{"']"}
+      max-width 100%
+      box-sizing border-box
+      {layourAlign_properties}
+
+  @media (min-width MEDIA_SM) and (max-width MEDIA_SM_TOP)
+    {"[layout-align-sm='"}{x}{" "}{y}{"']"}
+      max-width 100%
+      box-sizing border-box
+      {layourAlign_properties}
+
+  @media (min-width MEDIA_MD) and (max-width MEDIA_MD_TOP)
+    {"[layout-align-md='"}{x}{" "}{y}{"']"}
+      max-width 100%
+      box-sizing border-box
+      {layourAlign_properties}
+
+  @media (min-width MEDIA_LG) and (max-width MEDIA_LG_TOP)
+    {"[layout-align-lg='"}{x}{" "}{y}{"']"}
+      max-width 100%
+      box-sizing border-box
+      {layourAlign_properties}
+
+
+
+// Base
+
+_layoutAlign(start, start)
+_layoutAlign(start, center)
+_layoutAlign(start, end)
+_layoutAlign(start, stretch)
+
+_layoutAlign(center, start)
+_layoutAlign(center, center)
+_layoutAlign(center, end)
+_layoutAlign(center, stretch)
+
+_layoutAlign(end, start)
+_layoutAlign(end, center)
+_layoutAlign(end, end)
+_layoutAlign(end, stretch)
+
+_layoutAlign(space-around, start)
+_layoutAlign(space-around, center)
+_layoutAlign(space-around, end)
+_layoutAlign(space-around, stretch)
+
+_layoutAlign(space-between, start)
+_layoutAlign(space-between, center)
+_layoutAlign(space-between, end)
+_layoutAlign(space-between, stretch)
+
+
 
 /*
 | Flex
@@ -7,25 +163,90 @@ MEDIA_MD = 960px
 */
 
 [flex]
-    display flex
-    flex 1 1 auto
-    align-items center
-    flex-wrap wrap
-    
+  flex 1
+  box-sizing border-box
+
+
+
+  
+[flex="grow"]
+  flex: 1 1 100%
+
+[flex="initial"]
+  -webkit-flex 0 1 auto
+
+[flex="auto"]
+  -webkit-flex 1 1 auto
+
+[flex="none"]
+  flex 0 0 auto
+  
+[flex="noshrink"]
+  flex 1 0 auto
+
+[flex="nogrow"]
+  flex 0 1 auto
+
+[flex="0"]
+  flex 1 1 0%
+
+
 // Mixin
-_flex(width)
-    {"[flex='"}{width}{"']"}
-        min-width width+"%"!important
-        flex-grow 0
-        if(width % 5 != 0)
-            flex-basis width+(width/100)+"%"
-        else
-            flex-basis width+"%"
+_flex(percentage)
+
+  [layout="column"]
+    &>{"[flex='"}{percentage}{"']"}
+      flex 1 1 0%
+      max-width 100%
+      min-width 0
+      if(percentage % 5 != 0)
+        max-height percentage+(percentage/100) + "%"
+      else
+        max-height percentage + "%"
         
+  [layout="row"]
+    &>{"[flex='"}{percentage}{"']"}
+      flex 1 1 0%
+      max-height 100%
+      min-width 0
+      if(percentage % 5 != 0)
+        max-width percentage+(percentage/100) + "%"
+      else
+        max-width percentage + "%"
+  
+  flex_properties =
+    max-height 100%
+    box-sizing border-box
+    if(percentage % 5 != 0)
+      flex 1 1 percentage+(percentage/100) + "%"
+      max-width percentage+(percentage/100) + "%"
+    else
+      flex 1 1 percentage + "%"
+      max-width percentage + "%"
+
+  {"[flex='"}{percentage}{"']"}
+    {flex_properties}
+
+  @media screen and (max-width MEDIA_XS_TOP)
+    {"[flex-xs='"}{percentage}{"']"}
+      {flex_properties}
+
+  @media (min-width MEDIA_SM) and (max-width MEDIA_SM_TOP)
+    {"[flex-sm='"}{percentage}{"']"}
+      {flex_properties}
+
+  @media (min-width MEDIA_MD) and (max-width MEDIA_MD_TOP)
+    {"[flex-md='"}{percentage}{"']"}
+      {flex_properties}
+
+  @media (min-width MEDIA_LG) and (max-width MEDIA_LG_TOP)
+    {"[flex-lg='"}{percentage}{"']"}
+      {flex_properties}
+
+
     
 _flex(5)
 _flex(10)
-_flex(14.28)
 _flex(15)
 _flex(20)
 _flex(25)
@@ -48,86 +269,6 @@ _flex(100)
 _flex(33)
 
 
-/*
-| Flex-md
-|
-*/
-
-// Mixin
-_flex-md(width)
-    {"[flex-md='"}{width}{"']"}
-        min-width width+"%"
-        flex-grow 0
-        @media (min-width MEDIA_SM)  and (max-width MEDIA_MD)
-            if(width % 5 != 0)
-                flex-basis width+(width/100)+"%"
-            else
-                flex-basis width+"%"
-
-_flex-md(5)
-_flex-md(10)
-_flex-md(14.28)
-_flex-md(15)
-_flex-md(20)
-_flex-md(25)
-_flex-md(30)
-_flex-md(35)
-_flex-md(40)
-_flex-md(45)
-_flex-md(50)
-_flex-md(55)
-_flex-md(60)
-_flex-md(65)
-_flex-md(70)
-_flex-md(75)
-_flex-md(80)
-_flex-md(85)
-_flex-md(90)
-_flex-md(95)
-_flex-md(100)
-
-_flex-md(33)
-
-
-/*
-| Flex-sm
-|
-*/
-
-// Mixin
-_flex-sm(width)
-    {"[flex-sm='"}{width}{"']"}
-        min-width width+"%"
-        flex-grow 0
-        @media screen and (max-width MEDIA_SM)
-            if(width % 5 != 0)
-                flex-basis width+(width/100)+"%"
-            else
-                flex-basis width+"%"
-
-_flex-sm(5)
-_flex-sm(10)
-_flex-sm(14.28)
-_flex-sm(15)
-_flex-sm(20)
-_flex-sm(25)
-_flex-sm(30)
-_flex-sm(35)
-_flex-sm(40)
-_flex-sm(45)
-_flex-sm(50)
-_flex-sm(55)
-_flex-sm(60)
-_flex-sm(65)
-_flex-sm(70)
-_flex-sm(75)
-_flex-sm(80)
-_flex-sm(85)
-_flex-sm(90)
-_flex-sm(95)
-_flex-sm(100)
-
-_flex-sm(33)
 
 /*
 | Offset
@@ -135,16 +276,37 @@ _flex-sm(33)
 */
 
 // Mixin
-_flex-offset(margin-left)
-    {"[flex-offset='"}{margin-left}{"']"}
-        if(margin-left % 5 != 0)
-            margin-left margin-left+(margin-left/100)+"%"
-        else
-            margin-left margin-left+"%"
+_flex-offset(percentage)
+
+  flexOffset_properties =
+    if(percentage % 5 != 0)
+        margin-left percentage+(percentage/100)+"%"
+    else
+        margin-left percentage+"%"
+    
+  {"[flex-offset='"}{percentage}{"']"}
+    {flexOffset_properties}
+    
+  @media screen and (max-width MEDIA_XS_TOP)
+    {"[flex-offset-xs='"}{percentage}{"']"}
+      {flexOffset_properties}
+
+  @media (min-width MEDIA_SM) and (max-width MEDIA_SM_TOP)
+    {"[flex-offset-sm='"}{percentage}{"']"}
+      {flexOffset_properties}
+
+  @media (min-width MEDIA_MD) and (max-width MEDIA_MD_TOP)
+    {"[flex-offset-md='"}{percentage}{"']"}
+      {flexOffset_properties}
+
+  @media (min-width MEDIA_LG) and (max-width MEDIA_LG_TOP)
+    {"[flex-offset-lg='"}{percentage}{"']"}
+      {flexOffset_properties}
+
+
 
 _flex-offset(5)
 _flex-offset(10)
-_flex-offset(14.28)
 _flex-offset(15)
 _flex-offset(20)
 _flex-offset(25)
@@ -166,25 +328,6 @@ _flex-offset(100)
 
 _flex-offset(33)
 
-/*
-| Layout (direction)
-|
-*/
-
-[layout="row"]
-    flex-direction row
-
-[layout="column"]
-    flex-direction column
-
-
-[layout-sm="row"]
-    @media screen and (max-width MEDIA_SM)
-        flex-direction row
-
-[layout-sm="column"]
-    @media screen and (max-width MEDIA_SM)
-        flex-direction column
 
 
 /*

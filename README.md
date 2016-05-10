@@ -13,11 +13,11 @@ Here I assume you have [NodeJS installed](https://nodejs.org/en/download/) alrea
 
 First you'll need to install Stylus globally:
 
-`npm install -g stylus`
+`$ npm install -g stylus`
 
 Then you'll need to install autoprefixer-stylus because we live in a diverse world and _all_ browsers like to read CSS in a different way:
 
-`sudo apt-get install -g autoprefixer-stylus`
+`$ sudo apt-get install -g autoprefixer-stylus`
 
 **Note**: you can skip this step if you don't plan to support all current browsers, or if you come from a distant future where CSS is unified and no one uses old IE, in that case I hate you... I mean, I love you! can you use one of those Tardis like machines to get me there?
 
@@ -25,14 +25,14 @@ Then you'll need to install autoprefixer-stylus because we live in a diverse wor
 
 #### To play around with the lib:
 
-`stylus -u autoprefixer-stylus -w`
+`$ stylus -u autoprefixer-stylus -w`
 
 This starts a server watching for the specified file for changes and compiling it
 
     
 #### To generate a minified & vendor prefixed version:
 
-`stylus -u autoprefixer-stylus -c main.styl -o ./dist/main.min.css`
+`$ stylus -u autoprefixer-stylus -c main.styl -o ./dist/main.min.css`
 
 This updates the ./dist/main.min.css file.
 
