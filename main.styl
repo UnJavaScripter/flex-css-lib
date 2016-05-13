@@ -1,10 +1,10 @@
-MEDIA_XS_TOP       = 599px
+MEDIA_XS_TOP        = 599px
 
 MEDIA_SM            = 600px
 MEDIA_SM_TOP        = 959px
 
 MEDIA_MD            = 960px
-MEDIA_MD_TOP       = 1279px
+MEDIA_MD_TOP        = 1279px
 
 MEDIA_LG            = 1280px
 MEDIA_LG_TOP        = 1919px
@@ -16,50 +16,58 @@ MEDIA_LG_TOP        = 1919px
 |
 */
 
-[layout="row"]
+layout_row()
   flex-direction row
+  display flex
+
+layout_column()
+  flex-direction column
+  display flex
+
+[layout="row"]
+  layout_row()
     
 [layout="column"]
-  flex-direction column
+  layout_column()
 
 
 [layout-xs="row"]
-    @media screen and (max-width MEDIA_XS_TOP)
-        flex-direction row
+    @media (max-width MEDIA_XS_TOP)
+        layout_row()
 
 [layout-xs="column"]
-    @media screen and (max-width MEDIA_XS_TOP)
-        flex-direction column
+    @media (max-width MEDIA_XS_TOP)
+        layout_column()
         
 
 
 [layout-sm="row"]
     @media (min-width MEDIA_SM) and (max-width MEDIA_SM_TOP)
-        flex-direction row
+        layout_row()
 
 [layout-sm="column"]
     @media (min-width MEDIA_SM) and (max-width MEDIA_SM_TOP)
-        flex-direction column
+        layout_column()
 
 
 
 [layout-md="row"]
     @media (min-width MEDIA_MD) and (max-width MEDIA_MD_TOP)
-        flex-direction row
+        layout_row()
 
 [layout-md="column"]
     @media (min-width MEDIA_MD) and (max-width MEDIA_MD_TOP)
-        flex-direction column
+        layout_column()
 
 
 
 [layout-lg="row"]
     @media (min-width MEDIA_LG) and (max-width MEDIA_LG_TOP)
-        flex-direction row
+        layout_row()
 
 [layout-lg="column"]
     @media (min-width MEDIA_LG) and (max-width MEDIA_LG_TOP)
-        flex-direction column
+        layout_column()
 
 /*
 | Layout align
@@ -102,7 +110,7 @@ _layoutAlign(x = start center end space-around space-between, y = start center e
     box-sizing border-box
     {layourAlign_properties}
 
-  @media screen and (max-width MEDIA_XS_TOP)
+  @media (max-width MEDIA_XS_TOP)
     {"[layout-align-xs='"}{x}{" "}{y}{"']"}
       max-width 100%
       box-sizing border-box
@@ -193,26 +201,6 @@ _layoutAlign(space-between, stretch)
 
 // Mixin
 _flex(percentage)
-
-  [layout="column"]
-    &>{"[flex='"}{percentage}{"']"}
-      flex 1 1 0%
-      max-width 100%
-      min-width 0
-      if(percentage % 5 != 0)
-        max-height percentage+(percentage/100) + "%"
-      else
-        max-height percentage + "%"
-        
-  [layout="row"]
-    &>{"[flex='"}{percentage}{"']"}
-      flex 1 1 0%
-      max-height 100%
-      min-width 0
-      if(percentage % 5 != 0)
-        max-width percentage+(percentage/100) + "%"
-      else
-        max-width percentage + "%"
   
   flex_properties =
     max-height 100%
@@ -227,7 +215,7 @@ _flex(percentage)
   {"[flex='"}{percentage}{"']"}
     {flex_properties}
 
-  @media screen and (max-width MEDIA_XS_TOP)
+  @media (max-width MEDIA_XS_TOP)
     {"[flex-xs='"}{percentage}{"']"}
       {flex_properties}
 
@@ -287,7 +275,7 @@ _flex-offset(percentage)
   {"[flex-offset='"}{percentage}{"']"}
     {flexOffset_properties}
     
-  @media screen and (max-width MEDIA_XS_TOP)
+  @media (max-width MEDIA_XS_TOP)
     {"[flex-offset-xs='"}{percentage}{"']"}
       {flexOffset_properties}
 
@@ -337,7 +325,7 @@ _flex-offset(33)
 
 [align="start"]
     justify-content flex-start
-@media screen and (max-width MEDIA_XS_TOP)
+@media (max-width MEDIA_XS_TOP)
   [align-xs="start"]
     justify-content flex-start
 
@@ -357,7 +345,7 @@ _flex-offset(33)
 
 [align="end"]
     justify-content flex-end
-@media screen and (max-width MEDIA_XS_TOP)
+@media (max-width MEDIA_XS_TOP)
   [align-xs="end"]
     justify-content flex-end
 
@@ -376,7 +364,7 @@ _flex-offset(33)
 
 [align="center"]
     justify-content center
-@media screen and (max-width MEDIA_XS_TOP)
+@media (max-width MEDIA_XS_TOP)
   [align-xs="center"]
     justify-content center
 
@@ -403,7 +391,7 @@ _flex-offset(33)
 
 [layout-wrap="wrap"]
     flex-wrap wrap
-@media screen and (max-width MEDIA_XS_TOP)
+@media (max-width MEDIA_XS_TOP)
   [layout-wrap-xs="wrap"]
     flex-wrap wrap
 
@@ -423,7 +411,7 @@ _flex-offset(33)
 
 [layout-wrap="nowrap"]
     flex-wrap no-wrap
-@media screen and (max-width MEDIA_XS_TOP)
+@media (max-width MEDIA_XS_TOP)
   [layout-wrap-xs="nowrap"]
     flex-wrap no-wrap
 
@@ -443,7 +431,7 @@ _flex-offset(33)
 
 [layout-wrap="reverse"]
     flex-wrap wrap-reverse
-@media screen and (max-width MEDIA_XS_TOP)
+@media (max-width MEDIA_XS_TOP)
   [layout-wrap-xs="reverse"]
     flex-wrap wrap-reverse
 
