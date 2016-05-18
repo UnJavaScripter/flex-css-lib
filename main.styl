@@ -447,3 +447,22 @@ _flex-offset(33)
   [layout-wrap-lg="reverse"]
     flex-wrap wrap-reverse
 
+
+_hide()
+
+ @media (max-width MEDIA_XS_TOP)
+    {"[hide-xs]"}
+      display none
+
+  @media (min-width MEDIA_SM) and (max-width MEDIA_SM_TOP)
+    {"[hide-sm]"}
+      display none
+
+  @media (min-width MEDIA_MD) and (max-width MEDIA_MD_TOP)
+    {"[hide-md]"}
+      display none
+
+  @media (min-width MEDIA_LG) and (max-width MEDIA_LG_TOP)
+    {"[hide-lg]"}
+      display none
+_hide()

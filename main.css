@@ -3740,3 +3740,23 @@
             flex-wrap: wrap-reverse;
   }
 }
+@media (max-width: 599px) {
+  [hide-xs] {
+    display: none;
+  }
+}
+@media (min-width: 600px) and (max-width: 959px) {
+  [hide-sm] {
+    display: none;
+  }
+}
+@media (min-width: 960px) and (max-width: 1279px) {
+  [hide-md] {
+    display: none;
+  }
+}
+@media (min-width: 1280px) and (max-width: 1919px) {
+  [hide-lg] {
+    display: none;
+  }
+}
